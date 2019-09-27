@@ -10,7 +10,7 @@ Jeejio OS 是基于 Android 的 IoT(物联网) 设备操作系统，具有安全
 
 ###  开始使用 Jeejio OS SDK
 + SDK下载
- 前往 [Jeejio 官网](https://jeejio.com/) 下载。
+ 前往 [Github](https://github.com/jeejio/Jeejio-OS-SDK/releases/tag/1.0.0) 下载。
 + Android SDK导入
  将下载下来的 `CloudserviceLib.jar` 放入 AndroidStudio 工程的 `libs` 目录下，并在 `app/build.gradle` 文件中加入 `implementation files('libs/CloudServiceLib.jar')`，即可完成导入。
 
