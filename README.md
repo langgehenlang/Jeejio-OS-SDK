@@ -17,33 +17,62 @@ Jeejio OS 是基于 Android 的 IoT(物联网) 设备操作系统，具有安全
 ###  Jeejio OS SDK 主要 API 介绍
 + ICloudMessageListener：云服务事件监听器，可以通过该监听器收到来自云端的请求。
 + JeejioCloudService：云服务代理对象。您的APP可以通过此对象与 Jeejio 云服务建立链接。
++ OnInputEventListener：物端按键事件监听器，可以通过该监听器收到来物端按键的触发。
 
-###  演示
+###  演示1
 + 将您的APP注册到云服务中  
-```
+```java
 JeejioCloudService.registerClient(mContext, mCloudMessageListener);
 ```
 + 接收来自云端的请求  
-```
+```java
 public class CloudMessageListener implements ICloudMessageListener {
     @Override
-    public Message onCloudMessage(Message message) {
-        Bundle bundle = message.getData();
-        String body = bundle.getString("body");
-        // Get parameter from cloud.
-        JSONObject jParam = new JSONObject(body);
-        // Do sth.
-        Log.i(TAG, "Parameter from cloud: " + jParam.toString());
-        // Build response to cloud.
-        JSONObject jResult = new JSONObject(body);
-        jResult.put("result", 0);
-        bundle.putString("body", jResult.toString());
-        return message;
+    public HMessage onCloudMessage(HMessage message) {
+    // Get parameter from cloud.
+    String body = message.getBody();
+    // Do something.
+    Log.i(TAG, "Parameter from cloud: " + body);
+    // Build response to cloud.
+    return HMessage.createBodyMessage(body);
     }
 }
 ```
 + 从云服务中解除注册  
-```
+```java
 JeejioCloudService.unregisterClient();
+```
+
+### 演示2
+
++ 在您的APP注册物端按键监听
+
+```java
+InputEventService.getInputEventService(mContext).registerEventListener(mEventListener);
+```
+
+- 接收来自物端按键的响应
+
+```java
+public class InputEventListener implements OnInputEventListener {
+
+        @Override
+        public void onKeyUp(int keyCode) {
+            // Do something.
+            Log.i(TAG, "key up Code: " + keyCode);
+        }
+
+        @Override
+        public void onKeyDown(int keyCode) {
+            // Do something.
+            Log.i(TAG, "key Down Code: " + keyCode);
+        }
+    }
+```
+
+- 解除注册
+
+```java
+InputEventService.getInputEventService(mContext).unRegisterEventListener(mEventListener);
 ```
 
