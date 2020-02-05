@@ -6,7 +6,7 @@ Jeejio OS 是基于 Android 的 IoT(物联网) 设备操作系统，具有安全
 除了提供 Android 原生的 API 外，还针对不同的物端设备提供了硬件控制的接口。如果您具有 Android APP 的开发经验，可以轻松上手开发基于 Jeejio OS 的 APP，并使其运行在任何搭载了 Jeejio OS 的物联网设备上。  
 
 ###  什么是 Jeejio OS SDK
-是一个使您可以轻松开发物端 APP 的开发者工具包，提供了与控制端 H5 交互的功能，只需轻松3步即可使您的 APP 接入 Jeejio 云。  
+是一个使您可以轻松开发物端 APP 的开发者工具包，提供了与控制端 H5 交互和监听物端设备按键的功能，只需轻松几步即可使您的 APP 接入 Jeejio 云。  
 
 ###  开始使用 Jeejio OS SDK
 + SDK下载  
@@ -17,9 +17,13 @@ Jeejio OS 是基于 Android 的 IoT(物联网) 设备操作系统，具有安全
 ###  Jeejio OS SDK 主要 API 介绍
 + ICloudMessageListener：云服务事件监听器，可以通过该监听器收到来自云端的请求。
 + JeejioCloudService：云服务代理对象。您的APP可以通过此对象与 Jeejio 云服务建立链接。
-+ OnInputEventListener：物端按键事件监听器，可以通过该监听器收到来物端按键的触发。
++ InputEventService：按键服务。您可以通过该服务来监听物端设备按键事件。
++ OnInputEventListener：物端按键事件监听器，可以通过该监听器收到来物端按键的触发状态。
 
-###  演示1
+###  演示
+
+##### 1、与控制端 H5 交互
+
 + 将您的APP注册到云服务中  
 ```java
 JeejioCloudService.registerClient(mContext, mCloudMessageListener);
@@ -43,11 +47,14 @@ public class CloudMessageListener implements ICloudMessageListener {
 JeejioCloudService.unregisterClient();
 ```
 
-### 演示2
+##### 2、监听物端设备按键
+
+​	此服务需要的so库，已集成在jeejio设备中，所以运行在非jeejio设备上会报so库问题。如不需要此功能，可不注册此服务，则无影响。
 
 + 在您的APP注册物端按键监听
 
 ```java
+mEventListener = new WeakReference<OnInputEventListener>(new InputEventListener());
 InputEventService.getInputEventService(mContext).registerEventListener(mEventListener);
 ```
 
