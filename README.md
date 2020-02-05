@@ -49,7 +49,7 @@ JeejioCloudService.unregisterClient();
 
 ##### 2、监听物端设备按键
 
-​	此服务需要的so库，已集成在jeejio设备中，所以运行在非jeejio设备上会报so库问题。如不需要此功能，可不注册此服务，则无影响。
+​	<font color='red'>此服务需要的so库，已集成在jeejio设备中，所以运行在非jeejio设备上会报so库问题。如不需要此功能，可不注册此服务，则无影响。</font>
 
 + 在您的APP注册物端按键监听
 
