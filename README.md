@@ -54,7 +54,8 @@ JeejioCloudService.unregisterClient();
 + 在您的APP注册物端按键监听
 
 ```java
-mEventListener = new WeakReference<OnInputEventListener>(new InputEventListener());
+mEventListener = new InputEventListener();
+mEventListener = new WeakReference<OnInputEventListener>(mEventListener);
 InputEventService.getInputEventService(mContext).registerEventListener(mEventListener);
 ```
 

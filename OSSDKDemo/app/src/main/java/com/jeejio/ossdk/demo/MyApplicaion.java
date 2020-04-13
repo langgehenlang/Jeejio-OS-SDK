@@ -17,7 +17,7 @@ public class MyApplicaion extends Application {
 
     CloudMessageListener mCloudMessageListener;
     WeakReference<OnInputEventListener> mEventListener;
-
+    InputEventListener mInputEventListener;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -40,7 +40,8 @@ public class MyApplicaion extends Application {
 
         //PS:此服务需要的so库，已集成在jeejio设备中。如不需要此功能可屏蔽
         if (mEventListener == null){
-            mEventListener = new WeakReference<OnInputEventListener>(new InputEventListener());
+            mInputEventListener = new InputEventListener();
+            mEventListener = new WeakReference<OnInputEventListener>(mInputEventListener);
             //注册按键监听服务
             InputEventService.getInputEventService(this).registerEventListener(mEventListener);
         }
