@@ -22,6 +22,7 @@ public class MyApplicaion extends Application {
     public void onCreate() {
         super.onCreate();
         registerOSSDK();
+        Log.e(TAG, JeejioCloudService.SDK_VERSION);
     }
 
     @Override
