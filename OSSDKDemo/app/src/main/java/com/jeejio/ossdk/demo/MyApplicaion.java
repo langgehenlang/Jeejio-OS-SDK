@@ -1,6 +1,7 @@
 package com.jeejio.ossdk.demo;
 
 import android.app.Application;
+import android.provider.Settings;
 import android.util.Log;
 
 import com.jeejio.cloudservice.sdk.HMessage;
@@ -22,7 +23,6 @@ public class MyApplicaion extends Application {
     public void onCreate() {
         super.onCreate();
         registerOSSDK();
-        Log.e(TAG, JeejioCloudService.SDK_VERSION);
     }
 
     @Override
@@ -33,6 +33,18 @@ public class MyApplicaion extends Application {
 
 
     private void registerOSSDK(){
+
+        //获取sdk版本信息
+        Log.i(TAG, JeejioCloudService.SDK_VERSION);
+
+        //获取设备id
+        String deviceid = JeejioCloudService.getDeviceId(this);
+        Log.i(TAG, "deviceId = " + deviceid);
+
+        //获取userId
+        String userId = JeejioCloudService.getUserId(this);
+        Log.i(TAG, "userId = " + userId);
+
         if (mCloudMessageListener == null){
             mCloudMessageListener = new CloudMessageListener();
             //注册云服务

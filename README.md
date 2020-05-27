@@ -118,12 +118,28 @@ public class InputEventListener implements OnInputEventListener {
 InputEventService.getInputEventService(mContext).unRegisterEventListener(mEventListener);
 ```
 
+**3、获取基础信息**
+
+```java
+//获取sdk版本信息
+Log.i(TAG, JeejioCloudService.SDK_VERSION);
+
+//获取deviceId
+String deviceid = JeejioCloudService.getDeviceId(this);
+Log.i(TAG, "deviceId = " + deviceid);
+
+//获取userId
+String userId = JeejioCloudService.getUserId(this);
+Log.i(TAG, "userId = " + userId);
+```
+
 
 
 ## 更新日志
 
 | 版本号 | 发布时间   | 更新内容                                   |
 | ------ | ---------- | ------------------------------------------ |
+| 1.2.1  | 2020.05.27 | ●增加获取userId、deviceId等基础信息接口    |
 | 1.1.1  | 2020.05.15 | ●增加sdk版本信息接口                       |
 | 1.0.1  | 2020.03.24 | ●增加设备按键监听<br>●修改参数和返回值类型 |
 | 1.0.0  | 2019.09.27 | ●提供注册与云服务交互                      |
